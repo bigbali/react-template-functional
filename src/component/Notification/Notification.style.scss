@@ -1,0 +1,31 @@
+.Notification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 32px;
+    padding-block: 8px;
+
+    @include mobile {
+        background-color: var(--color-success-background);
+        color: var(--color-success-foreground);
+    }
+
+    &_success {
+        background-color: var(--color-success-background);
+        color: var(--color-success-foreground);
+    }
+
+    &_warning {
+        background-color: var(--color-warning-background);
+        color: var(--color-warning-foreground);
+    }
+
+    &_error {
+        background-color: var(--color-error-background);
+        color: var(--color-error-foreground);
+    }
+
+    p {
+        margin-block: 0;
+    }
+}

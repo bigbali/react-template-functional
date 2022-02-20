@@ -16,7 +16,9 @@ import { Provider, useDispatch } from 'react-redux';
 import { updateDevice } from 'Store/Device/Device.action';
 import store from 'Store';
 import { useDevice } from 'Util/Device';
-import { hidePopup, showPopup } from 'Store/Popup/Popup.action';
+import { hideNotification, showNotification, NOTIFICATION_STATUS_SUCCESS } from 'Store/Notification/Notification.action';
+
+import 'Style/main.scss';
 
 const App = () => {
     const { isMobile } = useDevice();
@@ -37,10 +39,14 @@ const App = () => {
 
     useEffect(() => {
         if (isMobile) {
-            dispatch(showPopup());
+            dispatch(
+                showNotification({ 
+                    message: 'Hey, it looks like you are visiting us from a mobile device! Very cool!',
+                    status: NOTIFICATION_STATUS_SUCCESS
+                }));
         }
         else {
-            dispatch(hidePopup());
+            dispatch(hideNotification());
         }
 
     }, [isMobile, dispatch]);

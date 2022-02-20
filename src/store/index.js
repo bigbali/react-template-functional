@@ -1,11 +1,11 @@
 import { combineReducers, createStore } from "redux";
 
-//import Notification from 'Store/Notification/Notification.reducer';
+import Notification from 'Store/Notification/Notification.reducer';
 import Popup from 'Store/Popup/Popup.reducer';
 import Device from "Store/Device/Device.reducer";
 
 export const reducer = combineReducers({
-    // notification: Notification,
+    notification: Notification,
     popup: Popup,
     device: Device
 });
