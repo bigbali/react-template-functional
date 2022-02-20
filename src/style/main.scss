@@ -10,6 +10,8 @@
     --color-secondary-background: rgb(215, 226, 240);
     --color-theme: rgb(204, 18, 18);
 
+    --color-neutral-background: rgb(27, 152, 168);
+    --color-neutral-foreground: var(--color-white);
     --color-success-background: rgb(27, 168, 34);
     --color-success-foreground: var(--color-white);
     --color-warning-background: rgb(212, 201, 46);
@@ -22,7 +24,8 @@
     box-sizing: border-box;
 }
 
-body {
+body,
+.root {
     margin: 0;
     background-color: var(--color-primary-background);
     font-family: $raleway;

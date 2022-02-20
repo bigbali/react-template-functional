@@ -12,15 +12,10 @@ export const initialState = {
 };
 
 export const Notification = (state = initialState, action) => {    
-    const { delay, timeout, message, status } = action;
-
     switch (action.type) {
         case NOTIFICATION_SHOW:
-            return {
-                delay,
-                timeout,
-                message,
-                status,
+            return { 
+                ...action,
                 isVisible: true
             };
 

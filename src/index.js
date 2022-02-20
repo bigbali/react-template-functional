@@ -41,8 +41,7 @@ const App = () => {
         if (isMobile) {
             dispatch(
                 showNotification({ 
-                    message: 'Hey, it looks like you are visiting us from a mobile device! Very cool!',
-                    status: NOTIFICATION_STATUS_SUCCESS
+                    message: 'Hey, it looks like you are visiting us from a mobile device! Very cool!'
                 }));
         }
         else {
@@ -54,6 +53,8 @@ const App = () => {
     return (
         <Router>
             <Header />
+            <Notification />
+            <Popup />
             <Routes>
                 <Route path="/" 
                     element={ <Index /> } />
@@ -62,8 +63,6 @@ const App = () => {
                 <Route path="*"
                     element={ <Error /> } />
             </Routes>
-            <Notification />
-            <Popup />
         </Router>
     );
 }
