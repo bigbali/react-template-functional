@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { hideNotification } from "Store/Notification/Notification.action";
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { hideNotification } from 'Store/Notification/Notification.action';
 
 import './Notification.style.scss';
 
@@ -25,7 +25,7 @@ export const Notification = () => {
                 setIsExpanded(true);
 
                 setTimeout(() => {
-                    dispatch(hideNotification(false));
+                    dispatch(hideNotification());
                 }, timeout);
             }, delay);
         }

@@ -12,15 +12,16 @@ export const initialState = {
 export const Device = (state = initialState, action) => {
     
     switch (action.type) {
-        case DEVICE_UPDATE:
+        case DEVICE_UPDATE: {
             const isMobile = getIsMobile();
 
             return {
                 isMobile
             };
-
-        default:
+        }
+        default: {
             return state;
+        }
     }
 };
 

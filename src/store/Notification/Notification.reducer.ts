@@ -3,7 +3,10 @@ import {
     NOTIFICATION_HIDE,
 } from 'Store/Notification/Notification.action';
 
-export const initialState = {
+import { NotificationType } from 'Type/Notification';
+// import { ActionType } from 'Type/Store/Action';
+
+export const initialState: NotificationType = {
     delay: 0,
     timeout: 0,
     message: '',
@@ -11,11 +14,13 @@ export const initialState = {
     isVisible: true
 };
 
-export const Notification = (state = initialState, action) => {    
+export const Notification = (state = initialState, action) => {  
+    const { type, payload } = action;
+
     switch (action.type) {
         case NOTIFICATION_SHOW:
             return { 
-                ...action,
+                ...payload,
                 isVisible: true
             };
 

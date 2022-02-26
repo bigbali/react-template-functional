@@ -10,13 +10,15 @@ import Example from 'Route/Example';
 import Error from 'Route/Error';
 import Header from 'Component/Header';
 import Notification from 'Component/Notification';
-import Popup from 'Component/Popup';
 import { useEffect } from 'react';
 import { Provider, useDispatch } from 'react-redux';
 import { updateDevice } from 'Store/Device/Device.action';
 import store from 'Store';
 import { useDevice } from 'Util/Device';
-import { hideNotification, showNotification, NOTIFICATION_STATUS_SUCCESS } from 'Store/Notification/Notification.action';
+import { 
+    hideNotification,
+    showNotification,
+} from 'Store/Notification/Notification.action';
 
 import 'Style/main.scss';
 
@@ -54,13 +56,12 @@ const App = () => {
         <Router>
             <Header />
             <Notification />
-            <Popup />
             <Routes>
-                <Route path="/" 
+                <Route path='/' 
                     element={ <Index /> } />
-                <Route path="/example/:?id"
+                <Route path='/example/:?id'
                     element={ <Example /> } />
-                <Route path="*"
+                <Route path='*'
                     element={ <Error /> } />
             </Routes>
         </Router>
@@ -68,10 +69,10 @@ const App = () => {
 }
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={ store }>
-        <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={ store }>
+            <App />
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );

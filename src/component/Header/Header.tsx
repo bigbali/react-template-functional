@@ -1,31 +1,12 @@
+import Navigation from 'Component/Navigation/Navigation';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { NOTIFICATION_STATUS_WARNING, showNotification } from 'Store/Notification/Notification.action';
+import { 
+    NOTIFICATION_STATUS_WARNING,
+    showNotification
+} from 'Store/Notification/Notification.action';
 import { useDevice } from 'Util/Device';
 
-import { navigationMap } from './Header.data';
-
 import './Header.style';
-
-const renderNavigationItem = (navigationItem) => {
-    const { title, to } = navigationItem;
-
-    return (
-        <li>
-            <Link to={ to }>
-                { title }
-            </Link>
-        </li>
-    );
-};
-
-const renderNavigation = () => {
-    return (
-        <ul>
-            { navigationMap.map(renderNavigationItem) }
-        </ul>
-    );
-};
 
 export const Header = () => {
     const { isMobile } = useDevice();
@@ -44,7 +25,7 @@ export const Header = () => {
             <h1>
                 { label }
             </h1>
-            { renderNavigation() }
+            <Navigation />
         </div>
     );
 };
