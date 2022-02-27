@@ -1,5 +1,5 @@
-export const DEVICE_UPDATE = 'DEVICE_UPDATE';
+import { DeviceActionType } from 'Type/DeviceType';
 
 export const updateDevice = () => ({
-    type: DEVICE_UPDATE
+    type: DeviceActionType
 });

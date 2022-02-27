@@ -1,20 +1,16 @@
 import { Link } from 'react-router-dom';
+import { NavigationItemType } from 'Type/NavigationType';
 import { navigationMap } from './Navigation.data';
 
 import './Navigation.style';
 
-type navigationItemType = {
-    title: string,
-    to: string
-};
-
-export const renderNavigationItem = (navigationItem: navigationItemType) => {
+export const renderNavigationItem = (navigationItem: NavigationItemType) => {
     const { title, to } = navigationItem;
 
     return (
         <li>
-            <Link to={ to }>
-                { title }
+            <Link to={to}>
+                {title}
             </Link>
         </li>
     );
@@ -22,10 +18,12 @@ export const renderNavigationItem = (navigationItem: navigationItemType) => {
 
 export const Navigation = () => {
     return (
-        <ul className='Navigation'>
-            { navigationMap.map(renderNavigationItem) }
-        </ul>
+        <nav className='Navigation'>
+            <ul className='Navigation-List'>
+                {navigationMap.map(renderNavigationItem)}
+            </ul>
+        </nav>
     );
-}
+};
 
-export default Navigation
+export default Navigation;

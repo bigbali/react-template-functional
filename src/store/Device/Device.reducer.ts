@@ -1,18 +1,19 @@
-import { DEVICE_UPDATE } from 'Store/Device/Device.action';
+import { DeviceActionType, IDevice, IDeviceAction } from 'Type/DeviceType';
 
-export const getIsMobile = () => {
+export const getIsMobile = (): boolean => {
     // Check for screens horizontally smaller than 810px
     return window.matchMedia('(max-width: 810px)').matches;
-}
+};
 
-export const initialState = {
+const initialState: IDevice = {
     isMobile: getIsMobile()
 };
 
-export const Device = (state = initialState, action) => {
-    
-    switch (action.type) {
-        case DEVICE_UPDATE: {
+export const DeviceReducer = (state = initialState, action: IDeviceAction) => {
+    const { type } = action;
+
+    switch (type) {
+        case DeviceActionType.Update: {
             const isMobile = getIsMobile();
 
             return {
@@ -25,4 +26,4 @@ export const Device = (state = initialState, action) => {
     }
 };
 
-export default Device;
+export default DeviceReducer;

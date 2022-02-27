@@ -1,39 +1,40 @@
 import {
-    NOTIFICATION_SHOW,
-    NOTIFICATION_HIDE,
-} from 'Store/Notification/Notification.action';
+    INotification,
+    INotificationAction,
+    NotificationActionType,
+    NotificationStatus
+} from 'Type/NotificationType';
 
-import { NotificationType } from 'Type/Notification';
-// import { ActionType } from 'Type/Store/Action';
-
-export const initialState: NotificationType = {
+export const initialState: INotification = {
     delay: 0,
     timeout: 0,
     message: '',
-    type: '',
-    isVisible: true
+    isVisible: true,
+    status: NotificationStatus.Informative
 };
 
-export const Notification = (state = initialState, action) => {  
+export const NotificationReducer = (state = initialState, action: INotificationAction) => {
     const { type, payload } = action;
 
-    switch (action.type) {
-        case NOTIFICATION_SHOW:
-            return { 
+    switch (type) {
+        case NotificationActionType.Show: {
+            return {
                 ...payload,
                 isVisible: true
             };
+        }
 
-        case NOTIFICATION_HIDE:
+        case NotificationActionType.Hide: {
             return {
                 ...state,
                 isVisible: false
             };
+        }
 
-        
-        default:
+        default: {
             return state;
+        }
     }
 };
 
-export default Notification;
+export default NotificationReducer;

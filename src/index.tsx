@@ -1,26 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route
-} from 'react-router-dom';
-import Index from 'Route/Index';
-import Example from 'Route/Example';
 import Error from 'Route/Error';
+import Example from 'Route/Example';
 import Header from 'Component/Header';
+import Index from 'Route/Index';
 import Notification from 'Component/Notification';
-import { useEffect } from 'react';
-import { Provider, useDispatch } from 'react-redux';
-import { updateDevice } from 'Store/Device/Device.action';
-import store from 'Store';
-import { useDevice } from 'Util/Device';
-import { 
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import store from 'Store/index';
+import { Provider } from 'react-redux';
+import {
+    Route,
+    BrowserRouter as Router,
+    Routes
+} from 'react-router-dom';
+import {
     hideNotification,
-    showNotification,
+    showNotification
 } from 'Store/Notification/Notification.action';
-
+import { updateDevice } from 'Store/Device/Device.action';
+import { useDevice } from 'Util/Device';
+import { useDispatch } from 'Util/Store';
 import 'Style/main.scss';
+
 
 const App = () => {
     const { isMobile } = useDevice();
@@ -29,27 +29,26 @@ const App = () => {
 
     const handleResize = () => {
         dispatch(updateDevice());
-    }
+    };
 
     useEffect(() => {
         window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
-        }
+        };
     });
 
     useEffect(() => {
         if (isMobile) {
             dispatch(
-                showNotification({ 
+                showNotification({
                     message: 'Hey, it looks like you are visiting us from a mobile device! Very cool!'
                 }));
         }
         else {
             dispatch(hideNotification());
         }
-
     }, [isMobile, dispatch]);
 
     return (
@@ -57,20 +56,20 @@ const App = () => {
             <Header />
             <Notification />
             <Routes>
-                <Route path='/' 
-                    element={ <Index /> } />
+                <Route path='/'
+                    element={<Index />} />
                 <Route path='/example/:?id'
-                    element={ <Example /> } />
+                    element={<Example />} />
                 <Route path='*'
-                    element={ <Error /> } />
+                    element={<Error />} />
             </Routes>
         </Router>
     );
-}
+};
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={ store }>
+        <Provider store={store}>
             <App />
         </Provider>
     </React.StrictMode>,

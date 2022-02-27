@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { hideNotification } from 'Store/Notification/Notification.action';
-
+import { useDispatch, useSelector } from 'Util/Store';
+import { useEffect, useState } from 'react';
 import './Notification.style.scss';
 
-export const Notification = () => {
-    const { 
+export const Notification: FC = () => {
+    const {
         delay,
         timeout,
         message,
@@ -19,7 +17,7 @@ export const Notification = () => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
-        console.log('effect')
+        console.log('effect');
         if (timeout && message && isVisible) {
             setTimeout(() => {
                 setIsExpanded(true);
@@ -38,7 +36,7 @@ export const Notification = () => {
             setIsExpanded(false);
         }
 
-    }, [delay, timeout, message, status, isVisible, dispatch])
+    }, [delay, timeout, message, status, isVisible, dispatch]);
 
     const getClass = () => {
         const className = 'Notification';
@@ -47,17 +45,17 @@ export const Notification = () => {
             return className;
         }
 
-        const mods = className + `_${ status.toLowerCase() } ${ isExpanded ? className + '_isExpanded' : '' }`
+        const mods = className + `_${status.toLowerCase()} ${isExpanded ? className + '_isExpanded' : ''}`;
 
         return className + ' ' + mods;
-    }
+    };
 
 
     return (
-        <div className={ getClass() }>
+        <div className={getClass()}>
             <p>
-                { message }
-                <span onClick={ () => { dispatch(hideNotification()) } }>
+                {message}
+                <span onClick={() => { dispatch(hideNotification()); }}>
                     X
                 </span>
             </p>

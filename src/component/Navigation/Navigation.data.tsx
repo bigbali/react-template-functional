@@ -1,7 +1,9 @@
+import { NavigationItemType } from 'Type/NavigationType';
+
 /**
  * An array of objects describing the available navigation links.
  */
-export const navigationMap = [
+export const navigationMap: NavigationItemType[] = [
     {
         title: 'Home',
         to: '/',
