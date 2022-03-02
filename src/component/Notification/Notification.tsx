@@ -5,8 +5,7 @@ import './Notification.style.scss';
 
 export const Notification: FC = () => {
     const {
-        delay,
-        timeout,
+        timeout = 5000,
         message,
         status,
         isVisible
@@ -16,27 +15,27 @@ export const Notification: FC = () => {
 
     const [isExpanded, setIsExpanded] = useState(false);
 
-    useEffect(() => {
-        console.log('effect');
-        if (timeout && message && isVisible) {
-            setTimeout(() => {
-                setIsExpanded(true);
+    const closeNotification = () => {
+        setIsExpanded(false);
 
-                setTimeout(() => {
+        setTimeout(() => {
+            dispatch(hideNotification());
+        }, 200);
+    };
+
+    useEffect(() => {
+        if (message && isVisible) {
+            setIsExpanded(true);
+
+            if (timeout) {
+                const notificationLifetime = setTimeout(() => {
                     dispatch(hideNotification());
                 }, timeout);
-            }, delay);
-        }
 
-        if (message && !timeout && isVisible) {
-            setIsExpanded(true);
+                return () => clearTimeout(notificationLifetime);
+            }
         }
-
-        if (!isVisible) {
-            setIsExpanded(false);
-        }
-
-    }, [delay, timeout, message, status, isVisible, dispatch]);
+    }, [timeout, message, isVisible]);
 
     const getClass = () => {
         const className = 'Notification';
@@ -50,13 +49,12 @@ export const Notification: FC = () => {
         return className + ' ' + mods;
     };
 
-
     return (
         <div className={getClass()}>
             <p>
                 {message}
-                <span onClick={() => { dispatch(hideNotification()); }}>
-                    X
+                <span onClick={closeNotification}>
+                    &nbsp;&nbsp;&nbsp;X
                 </span>
             </p>
         </div>

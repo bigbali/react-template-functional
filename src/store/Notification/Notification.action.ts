@@ -4,14 +4,12 @@ import {
 } from 'Type/NotificationType';
 
 export const showNotification = ({
-    delay = 0,
+    status = NotificationStatus.Informative,
     timeout = 0,
-    message = '',
-    status = NotificationStatus.Informative
+    message = ''
 }) => ({
     type: NotificationActionType.Show,
     payload: {
-        delay,
         timeout,
         message,
         status

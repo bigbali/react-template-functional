@@ -1,4 +1,4 @@
-export const Error: FC = () => {
+export const ErrorPage: FC = props => {
     return (
         <div>
             ErrorPage
@@ -6,4 +6,4 @@ export const Error: FC = () => {
     );
 };
 
-export default Error;
+export default ErrorPage;

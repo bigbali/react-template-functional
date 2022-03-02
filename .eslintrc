@@ -44,6 +44,25 @@
             "memberSyntaxSortOrder": ["single", "multiple", "all", "none"]
         }],
         "@typescript-eslint/semi": "error",
-        "@typescript-eslint/no-extra-semi": 0
+        "@typescript-eslint/no-extra-semi": 0,
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "enumMember",
+                "format": ["UPPER_CASE"],
+                "custom": {
+                    "regex": "^I[A-Z]",
+                    "match": false
+                }
+            },
+            {
+                "selector": "interface",
+                "format": ["PascalCase"],
+                "custom": {
+                    "regex": "^I[A-Z]",
+                    "match": true
+                }
+            }
+        ]
     }
 }

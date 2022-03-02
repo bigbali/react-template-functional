@@ -6,14 +6,13 @@ import {
 } from 'Type/NotificationType';
 
 export const initialState: INotification = {
-    delay: 0,
     timeout: 0,
     message: '',
-    isVisible: true,
+    isVisible: false,
     status: NotificationStatus.Informative
 };
 
-export const NotificationReducer = (state = initialState, action: INotificationAction) => {
+export const NotificationReducer = (state: INotification = initialState, action: INotificationAction) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -21,7 +20,7 @@ export const NotificationReducer = (state = initialState, action: INotificationA
             return {
                 ...payload,
                 isVisible: true
-            };
+            } as INotification;
         }
 
         case NotificationActionType.Hide: {

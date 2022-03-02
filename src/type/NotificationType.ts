@@ -1,3 +1,5 @@
+import { AnyAction } from '@reduxjs/toolkit';
+
 export enum NotificationStatus {
     Informative = 'INFORMATIVE',
     Success = 'SUCCESS',
@@ -10,15 +12,20 @@ export enum NotificationActionType {
     Hide = 'NOTIFICATION_HIDE'
 }
 
-export interface INotification {
-    delay?: number;
-    timeout?: number,
-    message?: string,
-    isVisible?: boolean,
-    status?: NotificationStatus
+export type INotification = {
+    timeout: number,
+    message: string,
+    isVisible: boolean,
+    status: NotificationStatus
+};
+
+export interface INotificationPayload {
+    timeout: number,
+    message: string,
+    status: NotificationStatus
 }
 
-export interface INotificationAction {
+export interface INotificationAction extends AnyAction {
     type: NotificationActionType,
-    payload?: INotification
+    payload?: INotificationPayload
 }

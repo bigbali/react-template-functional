@@ -1,7 +1,7 @@
-import Error from 'Route/Error';
-import Example from 'Route/Example';
+import ErrorPage from 'Route/Error';
+import ExamplePage from 'Route/Example';
 import Header from 'Component/Header';
-import Index from 'Route/Index';
+import IndexPage from 'Route/IndexPage';
 import Notification from 'Component/Notification';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
@@ -57,11 +57,11 @@ const App = () => {
             <Notification />
             <Routes>
                 <Route path='/'
-                    element={<Index />} />
+                    element={<IndexPage />} />
                 <Route path='/example/:?id'
-                    element={<Example />} />
+                    element={<ExamplePage />} />
                 <Route path='*'
-                    element={<Error />} />
+                    element={<ErrorPage />} />
             </Routes>
         </Router>
     );

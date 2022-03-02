@@ -1,4 +1,4 @@
-export const Index: FC = () => {
+export const IndexPage: FC = () => {
     return (
         <div>
             IndexPage
@@ -6,4 +6,4 @@ export const Index: FC = () => {
     );
 };
 
-export default Index;
+export default IndexPage;

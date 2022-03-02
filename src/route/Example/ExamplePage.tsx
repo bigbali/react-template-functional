@@ -1,4 +1,4 @@
-export const Example: FC = () => {
+export const ExamplePage: FC = () => {
     return (
         <div>
             ExamplePage
@@ -6,4 +6,4 @@ export const Example: FC = () => {
     );
 };
 
-export default Example;
+export default ExamplePage;
