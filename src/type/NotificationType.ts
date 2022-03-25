@@ -1,15 +1,15 @@
 import { AnyAction } from '@reduxjs/toolkit';
 
 export enum NotificationStatus {
-    Informative = 'INFORMATIVE',
-    Success = 'SUCCESS',
-    Warning = 'WARNING',
-    Error = 'ERROR'
+    INFORMATIVE = 'INFORMATIVE',
+    SUCCESS = 'SUCCESS',
+    WARNING = 'WARNING',
+    ERROR = 'ERROR'
 }
 
 export enum NotificationActionType {
-    Show = 'NOTIFICATION_SHOW',
-    Hide = 'NOTIFICATION_HIDE'
+    SHOW = 'NOTIFICATION_SHOW',
+    HIDE = 'NOTIFICATION_HIDE'
 }
 
 export type INotification = {

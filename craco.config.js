@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
     style: {
         sass: {
-            loaderOptions: {
+            loaderOptions: { // Make sure we can use mixins without needing to import
                 additionalData: '@import "src/style/mixin.scss";'
             },
         },
@@ -21,9 +21,16 @@ module.exports = {
         eslint: {
             mode: ESLINT_MODES.file
         },
-        configure: webpackConfig => {
+        configure: webpackConfig => { // Remove the need for '.scss' when importing
             webpackConfig.resolve.extensions.push('.scss');
             return webpackConfig;
         },
+    },
+    babel: { // babel-loader configuration
+        presets: [],
+        plugins: ['transform-rebem-jsx'],
+        // eslint-disable-next-line
+        loaderOptions: (babelLoaderOptions, { env, paths }) => { console.log('loader options'); return babelLoaderOptions; },
+        cacheDirectory: false
     }
 };

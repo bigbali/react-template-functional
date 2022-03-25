@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { NavigationItemType } from 'Type/NavigationType';
 import { navigationMap } from './Navigation.data';
 
@@ -9,16 +9,29 @@ export const renderNavigationItem = (navigationItem: NavigationItemType) => {
 
     return (
         <li>
-            <Link to={to}>
+            <NavLink
+                to={to}
+                className={({ isActive }) => (
+                    `Navigation-Link${
+                        isActive
+                            ? '_isActive'
+                            : ''
+                    }`
+                )}
+            >
                 {title}
-            </Link>
+            </NavLink>
         </li>
     );
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 export const Navigation = () => {
     return (
-        <nav className='Navigation'>
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        <nav block="Heyhey" elem="Hayhay">
             <ul className='Navigation-List'>
                 {navigationMap.map(renderNavigationItem)}
             </ul>

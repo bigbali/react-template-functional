@@ -4,11 +4,11 @@ import {
 } from 'Type/NotificationType';
 
 export const showNotification = ({
-    status = NotificationStatus.Informative,
+    status = NotificationStatus.INFORMATIVE,
     timeout = 0,
     message = ''
 }) => ({
-    type: NotificationActionType.Show,
+    type: NotificationActionType.SHOW,
     payload: {
         timeout,
         message,
@@ -17,5 +17,5 @@ export const showNotification = ({
 });
 
 export const hideNotification = () => ({
-    type: NotificationActionType.Hide
+    type: NotificationActionType.HIDE
 });

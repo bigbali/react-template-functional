@@ -1,0 +1,12 @@
+.Navigation {
+    margin-inline-start: auto;
+
+    &-Link {
+        text-decoration: none;
+        color: var(--color-primary-content);
+
+        &_isActive {
+            color: var(--color-theme);
+        }
+    }
+}

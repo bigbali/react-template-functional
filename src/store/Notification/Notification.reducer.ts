@@ -9,21 +9,21 @@ export const initialState: INotification = {
     timeout: 0,
     message: '',
     isVisible: false,
-    status: NotificationStatus.Informative
+    status: NotificationStatus.INFORMATIVE
 };
 
 export const NotificationReducer = (state: INotification = initialState, action: INotificationAction) => {
     const { type, payload } = action;
 
     switch (type) {
-        case NotificationActionType.Show: {
+        case NotificationActionType.SHOW: {
             return {
                 ...payload,
                 isVisible: true
             } as INotification;
         }
 
-        case NotificationActionType.Hide: {
+        case NotificationActionType.HIDE: {
             return {
                 ...state,
                 isVisible: false
