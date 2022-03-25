@@ -13,7 +13,7 @@ export const DeviceReducer = (state = initialState, action: IDeviceAction) => {
     const { type } = action;
 
     switch (type) {
-        case DeviceActionType.Update: {
+        case DeviceActionType.UPDATE: {
             const isMobile = getIsMobile();
 
             return {

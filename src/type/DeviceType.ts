@@ -1,5 +1,5 @@
 export enum DeviceActionType {
-    Update = 'DEVICE_UPDATE'
+    UPDATE = 'DEVICE_UPDATE'
 }
 
 export interface IDeviceAction {
