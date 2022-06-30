@@ -12,10 +12,9 @@ export const renderNavigationItem = (navigationItem: NavigationItemType) => {
             <NavLink
                 to={to}
                 className={({ isActive }) => (
-                    `Navigation-Link${
-                        isActive
-                            ? '_isActive'
-                            : ''
+                    `Navigation-Link${isActive
+                        ? '_isActive'
+                        : ''
                     }`
                 )}
             >
@@ -25,11 +24,8 @@ export const renderNavigationItem = (navigationItem: NavigationItemType) => {
     );
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 export const Navigation = () => {
     return (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         <nav block="Heyhey" elem="Hayhay">
             <ul className='Navigation-List'>

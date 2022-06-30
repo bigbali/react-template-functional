@@ -2,36 +2,23 @@
     "root": true,
     "parser": "@typescript-eslint/parser",
     "plugins": [
-        "@typescript-eslint",
-        "sort-imports-es6-autofix"
+        "@typescript-eslint"
     ],
     "extends": [
-        "eslint:recommended"
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "env": {
         "browser": true,
-        "commonjs": true,
-        "node": true,
         "es6": true
     },
-    "overrides": [
-        {
-            "files": [
-                "*.ts",
-                "*.tsx"
-            ],
-            "extends": [
-                "plugin:@typescript-eslint/recommended",
-                "plugin:@typescript-eslint/recommended-requiring-type-checking"
-            ],
-            "parserOptions": {
-                "ecmaVersion": "latest",
-                "project": [
-                    "./tsconfig.json"
-                ]
-            }
-        }
-    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "project": [
+            "./tsconfig.json"
+        ]
+    },
     "rules": {
         "linebreak-style": 0,
         "comma-dangle": 0,
@@ -42,10 +29,6 @@
         "object-curly-spacing": [
             "error",
             "always"
-        ],
-        "arrow-parens": [
-            "error",
-            "as-needed"
         ],
         "quotes": [
             "error",
@@ -66,19 +49,21 @@
                 "builtinGlobals": false
             }
         ],
-        "sort-imports-es6-autofix/sort-imports-es6": [
-            2,
-            {
-                "ignoreCase": false,
-                "ignoreMemberSort": false,
-                "memberSyntaxSortOrder": [
-                    "single",
-                    "multiple",
-                    "all",
-                    "none"
-                ]
-            }
-        ],
+        // "sort-imports-es6-autofix/sort-imports-es6": [
+        //     2,
+        //     {
+        //         "ignoreCase": false,
+        //         "ignoreMemberSort": false,
+        //         "memberSyntaxSortOrder": [
+        //             "single",
+        //             "multiple",
+        //             "all",
+        //             "none"
+        //         ]
+        //     }
+        // ],
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/semi": "error",
         "@typescript-eslint/no-extra-semi": 0,
         "@typescript-eslint/naming-convention": [

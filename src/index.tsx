@@ -1,17 +1,17 @@
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
 import ErrorPage from 'Route/Error';
 import ExamplePage from 'Route/Example';
 import Header from 'Component/Header';
 import IndexPage from 'Route/IndexPage';
 import Notification from 'Component/Notification';
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import store from 'Store/index';
-import { Provider } from 'react-redux';
 import {
     Route,
     BrowserRouter as Router,
     Routes
 } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
 import {
     hideNotification,
     showNotification
@@ -67,11 +67,11 @@ const App = () => {
     );
 };
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root')!);
+root.render(
     <React.StrictMode>
         <Provider store={store}>
             <App />
         </Provider>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 );

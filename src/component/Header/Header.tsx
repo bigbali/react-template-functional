@@ -1,7 +1,7 @@
+import { useDispatch } from 'react-redux';
 import Navigation from 'Component/Navigation/Navigation';
 import { showNotification } from 'Store/Notification/Notification.action';
 import { useDevice } from 'Util/Device';
-import { useDispatch } from 'react-redux';
 
 import './Header.style';
 

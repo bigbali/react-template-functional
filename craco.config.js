@@ -1,4 +1,4 @@
-const { ESLINT_MODES } = require('@craco/craco');
+// const { ESLINT_MODES } = require('@craco/craco');
 const path = require('path');
 
 module.exports = {
@@ -18,19 +18,35 @@ module.exports = {
             'Style': path.resolve(__dirname, 'src/style'),
             'Type': path.resolve(__dirname, 'src/type')
         },
-        eslint: {
-            mode: ESLINT_MODES.file
-        },
+        // eslint: {
+        //     mode: ESLINT_MODES
+        // },
         configure: webpackConfig => { // Remove the need for '.scss' when importing
             webpackConfig.resolve.extensions.push('.scss');
             return webpackConfig;
         },
     },
     babel: { // babel-loader configuration
-        presets: [],
-        plugins: ['transform-rebem-jsx'],
-        // eslint-disable-next-line
-        loaderOptions: (babelLoaderOptions, { env, paths }) => { console.log('loader options'); return babelLoaderOptions; },
-        cacheDirectory: false
+        // babelrc: true,
+        // presets: [
+        //     '@babel/preset-env',
+        //     '@babel/preset-react'
+        // ],
+        // plugins: [
+        //     '@babel/plugin-syntax-jsx',
+        //     'transform-rebem-jsx'
+        // ],
+        // presets: ['@babel/preset-react'],
+        // plugins: [],
+        loaderOptions: (options, { ...rest }) => {
+            console.error(options);
+            console.error(rest);
+            return {
+                ...options,
+                babelrc: true
+                // babelrcRoots: ['.', 'node_modules/babel-plugin-transform-bem-jsx']
+            };
+        },
+        extensions: ['.js', '.ts', '.jsx', '.tsx'] // can delete
     }
 };
