@@ -24,7 +24,7 @@
         "comma-dangle": 0,
         "max-len": [
             "error",
-            120
+            135
         ],
         "object-curly-spacing": [
             "error",
