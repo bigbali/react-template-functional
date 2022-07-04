@@ -21,7 +21,6 @@ import { useDevice } from 'Util/Device';
 import { useDispatch } from 'Util/Store';
 import 'Style/main.scss';
 
-
 const App = () => {
     const { isMobile } = useDevice();
 
@@ -33,6 +32,7 @@ const App = () => {
 
     useEffect(() => {
         window.addEventListener('resize', handleResize);
+        console.log('USE EFFECT');
 
         return () => {
             window.removeEventListener('resize', handleResize);
