@@ -1,8 +1,8 @@
-export const IndexPage: FC = () => {
+export const IndexPage = () => {
     return (
-        <div>
+        <main>
             IndexPage
-        </div>
+        </main>
     );
 };
 
