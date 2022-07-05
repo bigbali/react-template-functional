@@ -12,14 +12,12 @@ export const Header = () => {
     const label = isMobile ? 'React Template: mobile' : 'React Template: desktop';
 
     return (
-        // @ts-ignore
         <div block="Header" onClick={() => {
             dispatch(showNotification({
                 timeout: 5000,
                 message: 'You just clicked on the header',
             }));
         }}>
-            {/* @ts-ignore */}
             <h1 elem="Branding">
                 {label}
             </h1>

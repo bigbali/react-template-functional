@@ -26,8 +26,6 @@ export const NavigationItem = ({ title, to }: NavigationItemType) => {
     const [isActive, setIsActive] = useState(false);
 
     return (
-        // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         <li block="Navigation" elem="ListItem" mods={{ isActive }}>
             <NavLink
                 to={to}
@@ -44,9 +42,7 @@ export const NavigationItem = ({ title, to }: NavigationItemType) => {
 
 export const Navigation = () => {
     return (
-        // @ts-ignore
         <nav block="Navigation">
-            {/* @ts-ignore */}
             <ul elem="List">
                 {navigationMap.map(NavigationItem)}
             </ul>

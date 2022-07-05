@@ -3,13 +3,14 @@
         "target": "es6",
         "module": "commonjs",
         "allowUmdGlobalAccess": true,
+        "moduleResolution": "Node16",
         "resolveJsonModule": true, // Enable importing .json files
         "allowJs": true, // Allow JavaScript files to be a part of your program.
         "checkJs": false, // Enable error reporting in type-checked JavaScript files.
         "esModuleInterop": true, // Emit additional JavaScript to ease support for importing CommonJS modules.
         "forceConsistentCasingInFileNames": true,
         "strict": true,
-        "baseUrl": ".",
+        "baseUrl": "./",
         "jsx": "preserve",
         "paths": {
             "Style/*": [

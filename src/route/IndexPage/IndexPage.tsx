@@ -1,6 +1,6 @@
 export const IndexPage = () => {
     return (
-        <main>
+        <main block="IndexPage">
             IndexPage
         </main>
     );
