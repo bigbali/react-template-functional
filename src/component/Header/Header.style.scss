@@ -1,6 +1,7 @@
 :root {
-    --header-height: 80px;
+    --header-height: 60px;
     --header-background-color: rgba(255, 255, 255, 0.8);
+    // --header-background-color: rgba(230, 97, 97, 0.8);
 
     @include mobile {
         --header-height: 40px;
@@ -9,6 +10,7 @@
 
 .Header {
     display: flex;
+    align-items: center;
     position: fixed;
     inset-block-start: 0;
     inset-inline: 0;
@@ -16,31 +18,12 @@
     z-index: 99;
     height: var(--header-height);
     background-color: var(--header-background-color);
-    border-bottom: 1px solid var(--color-theme);
     backdrop-filter: blur(5px);
+    box-shadow: 0px 3px 8px #F5F5F5;
 
-    @include mobile {
-        //height: 40px;
-    }
-
-    h1 {
-        font-size: 32px;
-
-        @include mobile {
-            font-size: 24px;
-        }
-    }
-
-    ul {
-        margin-inline-start: auto;
-        display: flex;
-        font-size: 20px;
-
-        li {
-            list-style: none;
-            margin-inline-start: 24px;
-            height: fit-content;
-            padding: 8px;
-        }
+    &-Branding {
+        margin-block: auto;
+        font-size: 24px;
+        font-weight: 400;
     }
 }

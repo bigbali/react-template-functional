@@ -54,7 +54,7 @@ const App = () => {
     return (
         <Router>
             <Header />
-            <Notification />
+            {/* <Notification /> */}
             <Routes>
                 <Route path='/'
                     element={<IndexPage />} />
