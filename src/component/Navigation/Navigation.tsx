@@ -42,7 +42,7 @@ export const NavigationItem = ({ title, to }: NavigationItemType) => {
 
 export const Navigation = () => {
     return (
-        <nav block="Navigation">
+        <nav block="Navigation" className="False">
             <ul elem="List">
                 {navigationMap.map(NavigationItem)}
             </ul>

@@ -1,4 +1,4 @@
-export const ErrorPage: FC = props => {
+export const ErrorPage = () => {
     return (
         <div>
             ErrorPage

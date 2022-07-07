@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import Navigation from 'Component/Navigation/Navigation';
-import { showNotification } from 'Store/Notification/Notification.action';
-import { useDevice } from 'Util/Device';
+// import { showNotification } from 'Store/Notification/Notification.action';
+import { useDevice } from 'Util';
 
 import './Header.style';
 
@@ -13,10 +13,10 @@ export const Header = () => {
 
     return (
         <div block="Header" onClick={() => {
-            dispatch(showNotification({
-                timeout: 5000,
-                message: 'You just clicked on the header',
-            }));
+            // dispatch(showNotification({
+            //     timeout: 5000,
+            //     message: 'You just clicked on the header',
+            // }));
         }}>
             <h1 elem="Branding">
                 {label}

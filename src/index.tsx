@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import ErrorPage from 'Route/Error';
 import ExamplePage from 'Route/Example';
@@ -11,50 +12,34 @@ import {
     BrowserRouter as Router,
     Routes
 } from 'react-router-dom';
-import { createRoot } from 'react-dom/client';
-import {
-    hideNotification,
-    showNotification
-} from 'Store/Notification/Notification.action';
-import { updateDevice } from 'Store/Device/Device.action';
-import { useDevice } from 'Util/Device';
-import { useDispatch } from 'Util/Store';
 import 'Style/main.scss';
+import { useDevice, useNotification } from 'Util';
 
 const App = () => {
     const { isMobile } = useDevice();
-
-    const dispatch = useDispatch();
-
-    const handleResize = () => {
-        dispatch(updateDevice());
-    };
+    const {
+        show: showNotification,
+        hide: hideNotification,
+        setMessage: setNotificationMessage
+    } = useNotification();
 
     useEffect(() => {
-        window.addEventListener('resize', handleResize);
-        console.log('USE EFFECT');
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    });
+        setNotificationMessage('Hey, we detect that you are from a mobile device!');
+    }, []);
 
     useEffect(() => {
         if (isMobile) {
-            dispatch(
-                showNotification({
-                    message: 'Hey, it looks like you are visiting us from a mobile device! Very cool!'
-                }));
+            showNotification();
         }
         else {
-            dispatch(hideNotification());
+            hideNotification();
         }
-    }, [isMobile, dispatch]);
+    }, [isMobile]);
 
     return (
         <Router>
             <Header />
-            {/* <Notification /> */}
+            <Notification />
             <Routes>
                 <Route path='/'
                     element={<IndexPage />} />

@@ -1,54 +1,64 @@
 .Notification {
+    height: 200px;
+    background-color: dodgerblue;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding-inline: 32px;
-    padding-block: 8px;
-    position: absolute;
-    top: var(--header-height);
-    inset-inline: 0;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(var(--header-height));
-    transition: opacity 0.2s, transform 0.2s;
-
-    @include mobile {
-        background-color: var(--color-success-background);
-        color: var(--color-success-foreground);
-    }
+    align-items: center;
 
     p {
-        margin-block: 0;
-        opacity: 0;
+        width: fit-content;
     }
 
-    &_isExpanded {
-        opacity: 1;
-        pointer-events: all;
-        transform: translateY(0);
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // padding-inline: 32px;
+    // padding-block: 8px;
+    // position: absolute;
+    // top: var(--header-height);
+    // inset-inline: 0;
+    // opacity: 0;
+    // pointer-events: none;
+    // transform: translateY(var(--header-height));
+    // transition: opacity 0.2s, transform 0.2s;
 
-        p {
-            opacity: 1;
-        }
-    }
+    // @include mobile {
+    //     background-color: var(--color-success-background);
+    //     color: var(--color-success-foreground);
+    // }
 
-    &_informative {
-        background-color: var(--color-neutral-background);
-        color: var(--color-neutral-foreground);
-    }
+    // p {
+    //     margin-block: 0;
+    //     opacity: 0;
+    // }
 
-    &_success {
-        background-color: var(--color-success-background);
-        color: var(--color-success-foreground);
-    }
+    // &_isExpanded {
+    //     opacity: 1;
+    //     pointer-events: all;
+    //     transform: translateY(0);
 
-    &_warning {
-        background-color: var(--color-warning-background);
-        color: var(--color-warning-foreground);
-    }
+    //     p {
+    //         opacity: 1;
+    //     }
+    // }
 
-    &_error {
-        background-color: var(--color-error-background);
-        color: var(--color-error-foreground);
-    }
+    // &_informative {
+    //     background-color: var(--color-neutral-background);
+    //     color: var(--color-neutral-foreground);
+    // }
+
+    // &_success {
+    //     background-color: var(--color-success-background);
+    //     color: var(--color-success-foreground);
+    // }
+
+    // &_warning {
+    //     background-color: var(--color-warning-background);
+    //     color: var(--color-warning-foreground);
+    // }
+
+    // &_error {
+    //     background-color: var(--color-error-background);
+    //     color: var(--color-error-foreground);
+    // }
 }

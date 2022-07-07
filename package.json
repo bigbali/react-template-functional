@@ -30,7 +30,8 @@
         "sass": "^1.49.7",
         "sass-resources-loader": "^2.2.4",
         "typescript": "^4.7.4",
-        "web-vitals": "^2.1.4"
+        "web-vitals": "^2.1.4",
+        "rxjs": "^7.5.5"
     },
     "devDependencies": {
         "babel-plugin-transform-jsx-bem-attributes": "C:\\Users\\bigba\\Desktop\\babel-plugin-transform-jsx-bem-attributes\\babel-plugin-transform-jsx-bem-attributes"

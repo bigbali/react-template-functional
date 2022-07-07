@@ -13,6 +13,24 @@
         "baseUrl": "./",
         "jsx": "preserve",
         "paths": {
+            "Style": [
+                "src/style"
+            ],
+            "Component": [
+                "src/component"
+            ],
+            "Route": [
+                "src/route"
+            ],
+            "Store": [
+                "src/store"
+            ],
+            "Util": [
+                "src/util/index"
+            ],
+            "Type": [
+                "src/type"
+            ],
             "Style/*": [
                 "src/style/*"
             ],

@@ -1,61 +1,89 @@
-import { hideNotification } from 'Store/Notification/Notification.action';
-import { useDispatch, useSelector } from 'Util/Store';
+// import { hideNotification } from 'Store/Notification/Notification.action';
+import { useDevice, useDispatch, useSelector } from 'Util';
 import { useEffect, useState } from 'react';
 import './Notification.style.scss';
+import useNotification from 'Util/hook/useNotification';
+import { batch } from 'react-redux';
 
-export const Notification: FC = () => {
-    const {
-        timeout = 5000,
-        message,
-        status,
-        isVisible
-    } = useSelector(state => state.notification);
-
+export const Notification = () => {
     const dispatch = useDispatch();
+    const { isMobile } = useDevice();
 
-    const [isExpanded, setIsExpanded] = useState(false);
+    const {
+        notification,
+        show,
+        hide,
+        setMessage,
+        update
+    } = useNotification();
 
-    const closeNotification = () => {
-        setIsExpanded(false);
+    // useEffect(() => {
 
-        setTimeout(() => {
-            dispatch(hideNotification());
-        }, 200);
-    };
+    // }, [notification.visible]);
 
-    useEffect(() => {
-        if (message && isVisible) {
-            setIsExpanded(true);
+    // useEffect(() => {
+    //     batch(() => {
+    //         if (isMobile) {
+    //             if (!notification.message) {
+    //                 setMessage('Hello there');
+    //             }
+    //             if (!notification.visible) {
+    //                 show();
+    //             }
+    //         }
+    //     });
+    // }, [isMobile]);
 
-            if (timeout) {
-                const notificationLifetime = setTimeout(() => {
-                    dispatch(hideNotification());
-                }, timeout);
 
-                return () => clearTimeout(notificationLifetime);
-            }
-        }
-    }, [timeout, message, isVisible]);
+    // const [isExpanded, setIsExpanded] = useState(false);
 
-    const getClass = () => {
-        const className = 'Notification';
+    // const closeNotification = () => {
+    //     setIsExpanded(false);
+    //     console.log('CLOSE');
 
-        if (!status) {
-            return className;
-        }
+    //     setTimeout(() => {
+    //         dispatch(hideNotification());
+    //     }, 200);
+    // };
 
-        const mods = className + `_${status.toLowerCase()} ${isExpanded ? className + '_isExpanded' : ''}`;
+    // useEffect(() => {
+    //     if (message && isVisible) {
+    //         setIsExpanded(true);
 
-        return className + ' ' + mods;
-    };
+    //         if (timeout) {
+    //             const notificationLifetime = setTimeout(() => {
+    //                 dispatch(hideNotification());
+    //             }, timeout);
+
+    //             return () => clearTimeout(notificationLifetime);
+    //         }
+    //     }
+    // }, [timeout, message, isVisible]);
+
+    // const getClass = () => {
+    //     const className = 'Notification';
+
+    //     if (!status) {
+    //         return className;
+    //     }
+
+    //     const mods = className + `_${status.toLowerCase()} ${isExpanded ? className + '_isExpanded' : ''}`;
+
+    //     return className + ' ' + mods;
+    // };
+
+    // const x = notification.status
+    console.log(notification.status);
+
+    if (!notification.visible) {
+        return null;
+    }
 
     return (
-        <div className={getClass()}>
-            <p>
-                {message}
-                <span onClick={closeNotification}>
-                    &nbsp;&nbsp;&nbsp;X
-                </span>
+        <div block="Notification">
+            {/* @ts-ignore */}
+            <p elem="Message" mods={{ hello: true !== false }}>
+                {notification.message}
             </p>
         </div>
     );

@@ -65,9 +65,10 @@
         //     }
         // ],
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-extra-semi": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/semi": "error",
-        "@typescript-eslint/no-extra-semi": 0,
         "@typescript-eslint/naming-convention": [
             "error",
             {

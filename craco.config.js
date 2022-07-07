@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     style: {
@@ -21,6 +22,11 @@ module.exports = {
             webpackConfig.resolve.extensions.push('.scss');
             return webpackConfig;
         },
+        plugins: [
+            new webpack.DefinePlugin({
+                'BEM_JSX_ELEM_CONNECTOR': JSON.stringify("OYOY|")
+            })
+        ]
     },
     babel: { // babel-loader configuration
         loaderOptions: (options) => {
