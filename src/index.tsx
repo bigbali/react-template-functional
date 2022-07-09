@@ -1,45 +1,26 @@
-import React, { useEffect } from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import ErrorPage from 'Route/Error';
-import ExamplePage from 'Route/Example';
-import Header from 'Component/Header';
-import IndexPage from 'Route/IndexPage';
-import Notification from 'Component/Notification';
-import store from 'Store/index';
 import {
     Route,
     BrowserRouter as Router,
     Routes
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from 'Store';
+import ErrorPage from 'Route/Error';
+import ExamplePage from 'Route/Example';
+import IndexPage from 'Route/IndexPage';
+import Header from 'Component/Header';
+import Notification from 'Component/Notification';
+import Cookies from 'Component/Cookies/Cookies';
 import 'Style/main.scss';
-import { useDevice, useNotification } from 'Util';
 
 const App = () => {
-    const { isMobile } = useDevice();
-    const {
-        show: showNotification,
-        hide: hideNotification,
-        setMessage: setNotificationMessage
-    } = useNotification();
-
-    useEffect(() => {
-        setNotificationMessage('Hey, we detect that you are from a mobile device!');
-    }, []);
-
-    useEffect(() => {
-        if (isMobile) {
-            showNotification();
-        }
-        else {
-            hideNotification();
-        }
-    }, [isMobile]);
-
     return (
         <Router>
             <Header />
             <Notification />
+            <Cookies />
             <Routes>
                 <Route path='/'
                     element={<IndexPage />} />
@@ -54,9 +35,9 @@ const App = () => {
 
 const root = createRoot(document.getElementById('root')!);
 root.render(
-    <React.StrictMode>
+    <StrictMode>
         <Provider store={store}>
             <App />
         </Provider>
-    </React.StrictMode>
+    </StrictMode>
 );

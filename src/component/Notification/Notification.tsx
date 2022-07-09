@@ -4,18 +4,58 @@ import { useEffect, useState } from 'react';
 import './Notification.style.scss';
 import useNotification from 'Util/hook/useNotification';
 import { batch } from 'react-redux';
+import { useTimer } from 'Util/hook/useTimer';
+import { useInterval } from 'Util/hook/useInterval';
 
 export const Notification = () => {
     const dispatch = useDispatch();
     const { isMobile } = useDevice();
 
-    const {
-        notification,
-        show,
-        hide,
-        setMessage,
-        update
-    } = useNotification();
+    // test usetimer
+    // const { getTimeElapsed } = useTimer();
+
+    // useEffect(() => {
+    //     console.log('effect');
+
+    //     const interval = setInterval(() => {
+    //         console.log('interval');
+    //         console.log(getTimeElapsed());
+    //     }, 200);
+
+    //     return () => clearInterval(interval);
+    // }, []);
+
+    // const { time } = useTimer(true, 1000);
+
+    // useEffect(() => {
+    //     console.log(time);
+    // }, [time]);
+
+    // @ts-ignore
+    const { notification, show: showNotification, hide: hideNotification, setMessage, getMessage } = useNotification();
+
+    useEffect(() => {
+        if (isMobile) {
+            showNotification();
+        }
+        else {
+            hideNotification();
+        }
+    }, [isMobile]);
+
+    useEffect(() => { setTimeout(() => setMessage('()'), 200); }, []);
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-call
+    useInterval(() => { setMessage(`-${getMessage()}-`); }, 1000);
+
+    //
+    // const {
+    //     notification,
+    //     show,
+    //     hide,
+    //     setMessage,
+    //     update
+    // } = useNotification();
 
     // useEffect(() => {
 
@@ -73,7 +113,6 @@ export const Notification = () => {
     // };
 
     // const x = notification.status
-    console.log(notification.status);
 
     if (!notification.visible) {
         return null;
@@ -81,8 +120,7 @@ export const Notification = () => {
 
     return (
         <div block="Notification">
-            {/* @ts-ignore */}
-            <p elem="Message" mods={{ hello: true !== false }}>
+            <p elem="Message" mods={{ hello: !!notification.message }}>
                 {notification.message}
             </p>
         </div>

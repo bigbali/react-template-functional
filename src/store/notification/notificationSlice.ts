@@ -8,11 +8,11 @@ export enum NotificationStatus {
 };
 
 export interface Notification {
-    status?: NotificationStatus,
-    delay?: number,
-    duration?: number,
-    message?: string,
-    visible?: boolean
+    status: NotificationStatus,
+    delay: number,
+    duration: number,
+    message: string,
+    visible: boolean
 };
 
 export const initialState: Notification = {

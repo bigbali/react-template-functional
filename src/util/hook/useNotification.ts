@@ -1,28 +1,40 @@
 import { useDispatch, useSelector } from 'Util';
-import { actions, NotificationStatus, Notification } from 'Store/notification';
+import { actions } from 'Store/notification';
 import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
+import store from 'Store/index';
+import buildGetters from 'Util/buildGetters';
 
 export const useNotification = () => {
     const notification = useSelector(state => state.notification);
     const dispatch = useDispatch();
 
-    const dispatchActions = Object.keys(actions).reduce((acc, key) => {
+    // const getters = Object.keys(notification).reduce((acc, key) => {
+    //     return {
+    //         ...acc,
+    //         [`get${key.replace(/^[a-z]/, key[0].toUpperCase())}`]: () => {
+    //             return store.getState().notification[key as keyof typeof notification];
+    //         }
+    //     };
+    // }, { ...notification });
+
+    const getters = buildGetters(notification, 'notification');
+
+    const setters = Object.keys(actions).reduce((acc, key) => {
+        const prop = key as keyof typeof actions;
         return {
             ...acc,
-            // @ts-ignore
-            [key]: (args) => {
+            [prop]: (args: any) => {
                 // @ts-ignore
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-                dispatch(actions[key as keyof typeof actions](args));
+                dispatch(actions[prop](args));
             }
         };
     }, { ...actions });
 
-    // const { hide, setDelay, setDuration, setMessage, setStatus, show, toggle, update } = actions;
-
     return {
         notification,
-        ...dispatchActions
+        ...getters,
+        ...setters
         // hide: () => { dispatch(hide()); },
         // show: () => { dispatch(show()); },
         // toggle: () => { dispatch(toggle()); },
