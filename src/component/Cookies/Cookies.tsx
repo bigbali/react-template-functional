@@ -1,4 +1,6 @@
+import CloseIcon from 'Component/Icon/CloseIcon/CloseIcon';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Cookies.style';
 
 export const Cookies = () => {
@@ -11,24 +13,37 @@ export const Cookies = () => {
 
     return (
         <div block="Cookies">
+            <div elem="Header">
+                Cookies notice
+                <div elem="Close">
+                    <button
+                        elem="CloseButton"
+                        onClick={() => {
+                            localStorage.setItem('is_cookies_notice_closed', 'true');
+                            setIsClosed(true);
+                        }}>
+                        <CloseIcon />
+                    </button>
+                </div>
+            </div>
             <div elem="Body">
-                <div elem="Title">
-                    Cookies notice
-                </div>
-                <div elem="Text">
-                    We are by law obliged to tell you that we are using cookies. Their sole purpose is to improve your experience
-                    while browsing this site. If you continue browsing this page, you automatically accept these cookies.
-                </div>
+                We must inform you that we are using cookies to ensure your experience browsing this page is nothing less
+                than amazing. Thank you for your understanding.
+                <br />
+                By continuing to browse this page, you automatically agree to our cookie policy.
+                <br />
+                Read about our &nbsp;
+                <Link
+                    elem="CookiePolicy"
+                    to="cookie-policy"
+                    target="_blank"
+                >
+                    Cookie Policy here
+                </Link>.
             </div>
-            <div elem="Close">
-                <button onClick={() => {
-                    localStorage.setItem('is_cookies_notice_closed', 'true');
-                    setIsClosed(true);
-                }}>
-                    Close
-                </button>
-            </div>
+
         </div>
+
     );
 };
 

@@ -1,5 +1,4 @@
 .Cookies {
-    display: flex;
     position: fixed;
     inset-block-end: 0;
     inset-inline: 0;
@@ -8,11 +7,10 @@
     background-color: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(24px);
 
-    &-Body {
-        width: 100%;
-    }
 
-    &-Title {
+    &-Header {
+        display: flex;
+        align-items: center;
         padding-block: 4px;
         padding-inline: var(--content-padding);
         font-size: 20px;
@@ -22,16 +20,40 @@
         border-block-end: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    &-Text {
+    &-Close {
+        display: flex;
+        align-items: center;
+        margin-inline-start: auto;
+    }
+
+    &-CloseButton {
+        width: fit-content;
+        height: fit-content;
+        margin-inline-end: -4px;
+        padding: 4px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    &-Body {
         font-size: 16px;
         padding-block: 8px;
         padding-inline: var(--content-padding);
         color: var(--color-white);
+        line-height: 24px;
     }
 
-    &-Close {
-        // margin-inline-start: auto;
-        position: absolute;
-        inset: 0 0 0 auto;
+    &-CookiePolicy {
+        padding-inline: 4px;
+        text-decoration: none;
+        background-color: var(--color-theme);
+        color: var(--color-white);
+        transition: background-color 0.2s, color 0.2s;
+
+        &:hover {
+            background-color: var(--color-white);
+            color: var(--color-theme);
+        }
     }
 }
