@@ -7,7 +7,6 @@
     background-color: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(24px);
 
-
     &-Header {
         display: flex;
         align-items: center;
@@ -45,10 +44,11 @@
     }
 
     &-CookiePolicy {
-        padding-inline: 4px;
+        padding-inline: 8px;
         text-decoration: none;
         background-color: var(--color-theme);
         color: var(--color-white);
+        border-radius: 50vmin;
         transition: background-color 0.2s, color 0.2s;
 
         &:hover {

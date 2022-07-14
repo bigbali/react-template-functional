@@ -3,7 +3,7 @@
         "target": "es6",
         "module": "commonjs",
         "allowUmdGlobalAccess": true,
-        "moduleResolution": "Node16",
+        "moduleResolution": "node",
         "resolveJsonModule": true, // Enable importing .json files
         "allowJs": true, // Allow JavaScript files to be a part of your program.
         "checkJs": false, // Enable error reporting in type-checked JavaScript files.

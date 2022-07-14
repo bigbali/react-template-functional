@@ -69,10 +69,10 @@ export const deviceSlice = createSlice({
                 duration: action.payload
             };
         },
-        setMessage(state, action: PayloadAction<string>) {
+        setMessage(state, action: PayloadAction<string | (() => string)>) {
             return {
                 ...state,
-                message: action.payload
+                message: typeof action.payload === 'function' ? action.payload() : action.payload
             };
         }
     }

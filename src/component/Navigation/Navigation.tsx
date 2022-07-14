@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import type { NavigationItem as NavigationItemType } from 'Type/Navigation';
+import { useDevice } from 'Util';
 
 import './Navigation.style';
 
@@ -41,8 +42,10 @@ export const NavigationItem = ({ title, to }: NavigationItemType) => {
 };
 
 export const Navigation = () => {
+    const { isMobile, isDesktop } = useDevice();
+
     return (
-        <nav block="Navigation" className="False">
+        <nav block="Navigation" mods={{ isMobile, isDesktop }}>
             <ul elem="List">
                 {navigationMap.map(NavigationItem)}
             </ul>

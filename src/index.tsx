@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+// import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
     Route,
@@ -12,12 +12,14 @@ import ExamplePage from 'Route/Example';
 import IndexPage from 'Route/IndexPage';
 import Header from 'Component/Header';
 import Notification from 'Component/Notification';
-import Cookies from 'Component/Cookies/Cookies';
+import Cookies from 'Component/Cookies';
+import X from 'Component/X';
 import 'Style/main.scss';
 
 const App = () => {
     return (
         <Router>
+            <X />
             <Header />
             <Notification />
             <Cookies />
@@ -35,9 +37,10 @@ const App = () => {
 
 const root = createRoot(document.getElementById('root')!);
 root.render(
-    <StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </StrictMode>
+    // <StrictMode>
+    <Provider store={store}>
+        <App />
+    </Provider>
+    // </StrictMode>
 );
+

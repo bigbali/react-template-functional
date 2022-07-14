@@ -1,15 +1,19 @@
 import CloseIcon from 'Component/Icon/CloseIcon/CloseIcon';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDevice } from 'Util';
 import './Cookies.style';
 
 export const Cookies = () => {
     const isCookiesNoticeClosed = localStorage.getItem('is_cookies_notice_closed');
     const [isClosed, setIsClosed] = useState(false);
+    const { isMobile } = useDevice();
 
     if (isCookiesNoticeClosed || isClosed) {
         return null;
     }
+
+    const tapOrClick = isMobile ? 'Tap' : 'Click';
 
     return (
         <div block="Cookies">
@@ -27,19 +31,17 @@ export const Cookies = () => {
                 </div>
             </div>
             <div elem="Body">
-                We must inform you that we are using cookies to ensure your experience browsing this page is nothing less
-                than amazing. Thank you for your understanding.
+                We must inform you that we are using cookies to ensure your experience browsing this page is nothing less than amazing.
                 <br />
                 By continuing to browse this page, you automatically agree to our cookie policy.
                 <br />
-                Read about our &nbsp;
                 <Link
                     elem="CookiePolicy"
                     to="cookie-policy"
                     target="_blank"
                 >
-                    Cookie Policy here
-                </Link>.
+                    {tapOrClick} here to read about our Cookie Policy.
+                </Link>
             </div>
 
         </div>

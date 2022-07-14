@@ -1,7 +1,6 @@
 :root {
     --header-height: 60px;
     --header-background-color: rgba(255, 255, 255, 0.8);
-    // --header-background-color: rgba(230, 97, 97, 0.8);
 
     @include mobile {
         --header-height: 40px;
@@ -14,12 +13,13 @@
     position: fixed;
     inset-block-start: 0;
     inset-inline: 0;
-    padding-inline: var(--content-padding);
+    padding-inline: calc(var(--content-padding) + 16px);
     z-index: 99;
     height: var(--header-height);
     background-color: var(--header-background-color);
     backdrop-filter: blur(5px);
     box-shadow: 0px 3px 8px #F5F5F5;
+    margin-inline: -16px; // make the box shadow not rounded at the edges
 
     &-Branding {
         margin-block: auto;

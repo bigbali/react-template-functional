@@ -1,128 +1,77 @@
 // import { hideNotification } from 'Store/Notification/Notification.action';
 import { useDevice, useDispatch, useSelector } from 'Util';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './Notification.style.scss';
 import useNotification from 'Util/hook/useNotification';
 import { batch } from 'react-redux';
-import { useTimer } from 'Util/hook/useTimer';
+// import { useTimer } from 'Util/hook/useTimer';
 import { useInterval } from 'Util/hook/useInterval';
+import { useTimer } from 'Util/hook/useTimer';
+import { NotificationStatus } from 'Store/notification';
+import { CloseIcon } from 'Component/Icon';
 
 export const Notification = () => {
-    const dispatch = useDispatch();
-    const { isMobile } = useDevice();
-
-    // test usetimer
-    // const { getTimeElapsed } = useTimer();
-
-    // useEffect(() => {
-    //     console.log('effect');
-
-    //     const interval = setInterval(() => {
-    //         console.log('interval');
-    //         console.log(getTimeElapsed());
-    //     }, 200);
-
-    //     return () => clearInterval(interval);
-    // }, []);
-
-    // const { time } = useTimer(true, 1000);
-
-    // useEffect(() => {
-    //     console.log(time);
-    // }, [time]);
-
-    // @ts-ignore
-    const { notification, show: showNotification, hide: hideNotification, setMessage, getMessage } = useNotification();
+    const [keepRendered, setkeepRendered] = useState(false);
+    const [createTimer, clearTimer] = useTimer();
+    const ths = useRef<HTMLDivElement | null>(null);
+    const {
+        notification: {
+            message,
+            status,
+            visible
+        },
+        hide
+    } = useNotification();
 
     useEffect(() => {
-        if (isMobile) {
-            showNotification();
+        if (visible) {
+            createTimer(() => setkeepRendered(true), 250);
         }
         else {
-            hideNotification();
+            createTimer(() => setkeepRendered(false), 250);
         }
-    }, [isMobile]);
 
-    useEffect(() => { setTimeout(() => setMessage('()'), 200); }, []);
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-call
-    useInterval(() => { setMessage(`-${getMessage()}-`); }, 1000);
+        return () => { clearTimer(); };
+    }, [visible]);
 
-    //
-    // const {
-    //     notification,
-    //     show,
-    //     hide,
-    //     setMessage,
-    //     update
-    // } = useNotification();
+    useEffect(() => {
+        const element = ths.current;
 
-    // useEffect(() => {
+        if (element) {
+            if (visible && keepRendered) {
+                element.className = `${element.className} visible`;
+            }
+            if (!visible && keepRendered) {
+                element.className = `${element.className} fading`;
+            }
+        }
+    }, [visible, keepRendered, ths.current]);
 
-    // }, [notification.visible]);
-
-    // useEffect(() => {
-    //     batch(() => {
-    //         if (isMobile) {
-    //             if (!notification.message) {
-    //                 setMessage('Hello there');
-    //             }
-    //             if (!notification.visible) {
-    //                 show();
-    //             }
-    //         }
-    //     });
-    // }, [isMobile]);
-
-
-    // const [isExpanded, setIsExpanded] = useState(false);
-
-    // const closeNotification = () => {
-    //     setIsExpanded(false);
-    //     console.log('CLOSE');
-
-    //     setTimeout(() => {
-    //         dispatch(hideNotification());
-    //     }, 200);
-    // };
-
-    // useEffect(() => {
-    //     if (message && isVisible) {
-    //         setIsExpanded(true);
-
-    //         if (timeout) {
-    //             const notificationLifetime = setTimeout(() => {
-    //                 dispatch(hideNotification());
-    //             }, timeout);
-
-    //             return () => clearTimeout(notificationLifetime);
-    //         }
-    //     }
-    // }, [timeout, message, isVisible]);
-
-    // const getClass = () => {
-    //     const className = 'Notification';
-
-    //     if (!status) {
-    //         return className;
-    //     }
-
-    //     const mods = className + `_${status.toLowerCase()} ${isExpanded ? className + '_isExpanded' : ''}`;
-
-    //     return className + ' ' + mods;
-    // };
-
-    // const x = notification.status
-
-    if (!notification.visible) {
+    if (!visible && !keepRendered) {
         return null;
     }
 
     return (
-        <div block="Notification">
-            <p elem="Message" mods={{ hello: !!notification.message }}>
-                {notification.message}
+        <div
+            ref={ths}
+            block="Notification"
+            mods={{
+                INFO: status === NotificationStatus.INFO,
+                SUCCESS: status === NotificationStatus.SUCCESS,
+                WARNING: status === NotificationStatus.WARNING,
+                ERROR: status === NotificationStatus.ERROR
+            }}
+        >
+            <p elem="Message">
+                {message}
             </p>
+            <button
+                elem="CloseButton"
+                onClick={() => {
+                    hide();
+                }}>
+                <CloseIcon />
+            </button>
         </div>
     );
 };

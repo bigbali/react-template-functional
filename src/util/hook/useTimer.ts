@@ -1,25 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useRef } from 'react';
 
-export const useTimer = (forceRerender = false, interval = 1000) => {
-    const [time, setTime] = forceRerender ? useState(0) : [null, null];
-    const initialTime = Date.now();
+export const useTimer = () => {
+    const _timeoutId = useRef<NodeJS.Timeout | null>(null);
 
-    useEffect(() => {
-        if (time !== null) {
-            const cb = setInterval(() => {
-                console.log('settime');
-                setTime((time) => time + 1);
-            }, interval);
-
-            return () => clearInterval(cb);
-        }
+    const _timeout = useCallback((callback: () => void, timeout: number) => {
+        _timeoutId.current = setTimeout(callback, timeout);
+        return _timeoutId.current;
     }, []);
 
-    return {
-        getTimeElapsed: () => {
-            console.log('Getting time');
-            return Math.floor((Date.now() - initialTime) / 1000);
-        },
-        time: time !== null ? time : 0
-    };
+    const _cleanup = useCallback(() => {
+        _timeoutId.current
+            ? clearTimeout(_timeoutId.current)
+            : console.error('You need to initialize a timer before cleaning it up!');
+    }, []);
+
+    return [_timeout, _cleanup] as const;
 };
+
+export default useTimer;

@@ -1,8 +1,18 @@
-import { useEffect } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
-export const useInterval = (callback: () => void, interval: number) => {
-    useEffect(() => {
-        const _interval = setInterval(callback, interval);
-        return () => clearInterval(_interval);
-    }, []);
+export const useInterval = (callback: () => void, interval = 1000) => {
+    // const _intervalId = useRef<NodeJS.Timer>(null);
+    // const _interval = useMemo(() => {
+    //     return () => setInterval(callback, interval);
+    // }, []);
+
+    // const _cleanup = useCallback(() => {
+    //     clearInterval(_interval);
+    // }, []);
+
+    const _interval = () => { throw Error('not implemented!'); };
+
+    return [_interval] as const;
 };
+
+export default useInterval;

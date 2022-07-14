@@ -7,7 +7,10 @@ export const store = configureStore({
         notification: notificationReducer,
         device: deviceReducer
     },
-    devTools: true
+    devTools: true,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false // allow callbacks as payload
+    })
 });
 
 export default store;
