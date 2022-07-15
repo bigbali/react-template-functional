@@ -1,0 +1,14 @@
+.Icon {
+    &-HamburgerMenu {
+        path {
+            fill: var(--color-primary-content);
+            transition: fill 0.2s;
+        }
+
+        &:hover {
+            path {
+                fill: var(--color-theme);
+            }
+        }
+    }
+}

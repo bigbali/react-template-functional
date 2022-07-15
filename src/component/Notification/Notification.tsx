@@ -24,12 +24,7 @@ export const Notification = () => {
     } = useNotification();
 
     useEffect(() => {
-        if (visible) {
-            createTimer(() => setkeepRendered(true), 250);
-        }
-        else {
-            createTimer(() => setkeepRendered(false), 250);
-        }
+        createTimer(() => setkeepRendered(visible), 250);
 
         return () => { clearTimer(); };
     }, [visible]);

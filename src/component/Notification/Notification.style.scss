@@ -17,19 +17,23 @@
     }
 
     &_INFO {
-        background-color: rgb(0, 131, 218);
+        background-color: var(--color-neutral-background);
+        color: var(--color-neutral-foreground);
     }
 
     &_SUCCESS {
-        background-color: green;
+        background-color: var(--color-success-background);
+        color: var(--color-success-foreground);
     }
 
     &_WARNING {
-        background-color: orange;
+        background-color: var(--color-warning-background);
+        color: var(--color-warning-foreground);
     }
 
     &_ERROR {
-        background-color: red;
+        background-color: var(--color-error-background);
+        color: var(--color-error-foreground);
     }
 
     p {

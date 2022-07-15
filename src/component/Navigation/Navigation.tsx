@@ -1,3 +1,4 @@
+import { HamburgerMenuIcon } from 'Component/Icon';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import type { NavigationItem as NavigationItemType } from 'Type/Navigation';
@@ -25,15 +26,25 @@ export const navigationMap: NavigationItemType[] = [
 
 export const NavigationItem = ({ title, to }: NavigationItemType) => {
     const [isActive, setIsActive] = useState(false);
+    const isActiveRef = useRef(false);
+
+    useEffect(() => {
+        if (isActiveRef.current) {
+            setIsActive(true);
+        }
+    }, [isActiveRef.current]);
 
     return (
         <li block="Navigation" elem="ListItem" mods={{ isActive }}>
             <NavLink
                 to={to}
-                style={({ isActive }) => { // Set state in order to use isActive on NavLink parent
-                    setIsActive(isActive);
-                    return {};
-                }}
+                // style={({ isActive }) => { // Set state in order to use isActive on NavLink parent
+                //     if (isActive) {
+                //         isActiveRef.current = true;
+                //     }
+                //     return {};
+                // }}
+                className={({ isActive }) => isActive ? 'active' : ''}
             >
                 {title}
             </NavLink>
@@ -49,6 +60,11 @@ export const Navigation = () => {
             <ul elem="List">
                 {navigationMap.map(NavigationItem)}
             </ul>
+            {/* {isMobile
+                ? <HamburgerMenuIcon />
+                : (
+                )
+            } */}
         </nav>
     );
 };

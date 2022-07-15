@@ -33,6 +33,12 @@
         border: none;
         background-color: transparent;
         cursor: pointer;
+
+        &:hover {
+            path {
+                fill: var(--color-theme);
+            }
+        }
     }
 
     &-Body {

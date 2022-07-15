@@ -1,4 +1,4 @@
-import CloseIcon from 'Component/Icon/CloseIcon/CloseIcon';
+import { CloseIcon } from 'Component/Icon';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDevice } from 'Util';

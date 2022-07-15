@@ -11,28 +11,55 @@
     }
 
     &-ListItem {
-        // margin-inline-start: 32px;
-        padding-inline: 16px;
-        padding-block: 8px;
+        margin-inline-start: 16px;
         list-style-type: none;
         font-size: 18px;
         transition: all 0.2s;
 
         a {
             display: block;
+            padding-inline: 16px;
+            padding-block: 8px;
             height: 100%;
             text-decoration: none;
+            background-image: linear-gradient(var(--color-theme),
+                    var(--color-theme));
+            background-repeat: no-repeat;
+            background-size: 100% 0;
+            background-position: top;
+            transition: background-size 0.2s ease-out,
+                color 0.3s ease-out;
             color: var(--color-primary-content);
-        }
+            border-radius: 32px;
 
-        &_isActive {
-            a {
-                color: var(--color-theme);
+            &:hover {
+                background-size: 100% 100%;
+                background-position: bottom;
+                color: var(--color-white);
+            }
+
+            &.active {
+                background-size: 100% 10%;
+                background-position: bottom;
+                transition: background-size 0.2s ease-out, background-position 0.2s,
+                    color 0.2s, border-radius 0.5s ease;
+                border-radius: 0;
+
+                &:hover {
+                    background-size: 100% 100%;
+                    border-radius: 32px;
+                    transition: background-size 0.2s ease, background-position 0.2s,
+                        color 0.2s, border-radius 0.2s ease-out;
+                }
             }
         }
+    }
 
-        &:hover {
-            background-color: antiquewhite;
+    .Icon-HamburgerMenu {
+        svg {
+            path {
+                fill: var(--color-primary-content);
+            }
         }
     }
 }
