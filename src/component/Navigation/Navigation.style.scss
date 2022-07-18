@@ -56,10 +56,25 @@
     }
 
     .Icon-HamburgerMenu {
+        @include mobile {
+            width: 32px;
+            height: 32px;
+        }
+
         svg {
             path {
                 fill: var(--color-primary-content);
             }
         }
+    }
+
+    // create backdrop component?
+
+    &-MobileMenuWrapper {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.25);
     }
 }
