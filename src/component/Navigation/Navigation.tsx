@@ -4,32 +4,39 @@ import NavigationMobile from './NavigationMobile';
 import './Navigation.style';
 
 export type NavigationItemType = {
-    title: string,
+    label: string,
+    name: string,
     to: string
 };
 
 export const navigationMap: NavigationItemType[] = [
     {
-        title: 'home',
-        to: '/',
+        label: 'home',
+        name: 'index',
+        to: '/'
     },
     {
-        title: 'about',
-        to: '/about',
+        label: 'about',
+        name: 'about',
+        to: '/about'
     },
     {
-        title: 'contact',
-        to: '/contact',
+        label: 'contact',
+        name: 'contact',
+        to: '/contact'
     }
 ];
+
 
 export const Navigation = () => {
     const { isMobile } = useDevice();
 
-    return isMobile
-        ? <NavigationMobile />
-        : <NavigationDesktop />;
+    return (
+        isMobile
+            ? <NavigationMobile />
+            : <NavigationDesktop />
 
+    );
 };
 
 export default Navigation;

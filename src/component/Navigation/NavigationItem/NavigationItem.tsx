@@ -1,16 +1,18 @@
-import { NavLink } from 'react-router-dom';
-import { NavigationItemType } from '../Navigation';
+import {
+    NavigationItemType,
+} from '../Navigation';
+import NavigationLink from '../NavigationLink';
 
-export const NavigationItem = ({ title, to }: NavigationItemType) => {
+export const NavigationItem = ({ label, to }: NavigationItemType) => {
     return (
         <li block="Navigation" elem="ListItem">
-            <NavLink
+            <NavigationLink
                 to={to}
                 className={({ isActive }) => isActive ? 'active' : ''}
             >
-                {title}
-            </NavLink>
-        </li>
+                {label}
+            </NavigationLink>
+        </li >
     );
 };
 

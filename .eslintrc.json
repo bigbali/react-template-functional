@@ -68,6 +68,7 @@
         "@typescript-eslint/no-extra-semi": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/semi": "error",
         "@typescript-eslint/naming-convention": [
             "error",
