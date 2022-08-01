@@ -4,10 +4,18 @@
     margin-inline-start: auto;
     height: 100%;
 
+    @include mobile {
+        display: block;
+    }
+
     &-List {
         display: flex;
         margin-block: auto;
         padding-inline-start: 0;
+
+        @include mobile {
+            flex-direction: column;
+        }
     }
 
     &-ListItem {
@@ -15,6 +23,18 @@
         list-style-type: none;
         font-size: 18px;
         transition: all 0.2s;
+
+        @include mobile {
+            margin-inline: 0;
+        }
+
+        &:not(:first-child) {
+            a {
+                @include mobile {
+                    padding-block-start: 16px;
+                }
+            }
+        }
 
         a {
             display: block;
@@ -31,12 +51,34 @@
                 color 0.3s ease-out;
             color: var(--color-primary-content);
             border-radius: 32px;
+            position: relative;
+
+            &::before {
+                @include mobile {
+                    content: "";
+                    position: absolute;
+                    inset-block-end: 0;
+                    inset-inline: 0;
+                    height: 100%;
+                    background-image: linear-gradient(var(--color-theme), var(--color-theme));
+                    background-size: 0 3px;
+                    background-position: bottom left;
+                    background-repeat: no-repeat;
+                    transition: background-size 0.2s ease-out;
+                }
+            }
 
             &:hover {
-                background-size: 100% 100%;
-                background-position: bottom;
-                color: var(--color-white);
-                transition: color 0.1s, background-color 1s, background-size 0.2s ease-out;
+                @include desktop {
+                    background-size: 100% 100%;
+                    background-position: bottom;
+                    color: var(--color-white);
+                    transition: color 0.1s, background-color 1s, background-size 0.2s ease-out;
+                }
+
+                @include mobile {
+                    color: inherit;
+                }
 
                 &:active {
                     // note the difference between :active and .active
@@ -46,30 +88,78 @@
             }
 
             &.active {
-                background-size: 100% 10%;
-                background-position: bottom;
-                transition: background-size 0.2s ease-out, background-position 0.2s,
-                    color 0.2s, border-radius 0.5s ease;
-                border-radius: 0;
+                @include desktop {
+                    background-size: 100% 10%;
+                    background-position: bottom;
+                    transition: background-size 0.2s ease-out, background-position 0.2s,
+                        color 0.2s, border-radius 0.5s ease;
+                    border-radius: 0;
+                }
+
+                &::before {
+                    @include mobile {
+                        background-size: 40% 3px;
+                    }
+                }
 
                 &:hover {
-                    background-size: 100% 100%;
-                    border-radius: 32px;
-                    transition: background-size 0.2s ease, background-position 0.2s,
-                        color 0.2s, border-radius 0.2s ease-out;
+                    @include desktop {
+                        background-size: 100% 100%;
+                        border-radius: 32px;
+                        transition: background-size 0.2s ease, background-position 0.2s,
+                            color 0.2s, border-radius 0.2s ease-out;
+                    }
+
+                    @include mobile {
+                        background-size: 0;
+                    }
 
                     &:active {
                         // selected & clicked on
-                        background-position: center;
-                        background-size: 100% 75%;
-                        transition: none;
+
+                        @include desktop {
+                            background-position: center;
+                            background-size: 100% 75%;
+                            transition: none;
+                        }
+
+                        @include mobile {
+                            background-size: 0;
+                        }
                     }
                 }
             }
 
             &.previouslyactive {
-                animation-name: DeselectActive;
-                animation-duration: 400ms;
+
+                // TODO: bug -> reselect item then click on another -> no fade out anim
+                &:not(.active) {
+
+                    // Prevent animation when reselecting item
+                    @include desktop {
+                        animation-name: DeselectActive;
+                        animation-duration: 400ms;
+                    }
+                }
+
+                &:not(:active)::before {
+                    @include mobile {
+                        animation-name: DeselectActiveMobile;
+                        animation-duration: 300ms;
+                        background-size: 0;
+                    }
+                }
+
+                &.active::before {
+                    @include mobile {
+                        animation-name: DeselectActiveMobile;
+                        animation-duration: 300ms;
+                        animation-timing-function: ease;
+                        animation-iteration-count: 2;
+                        animation-direction: alternate;
+                        animation-fill-mode: forwards;
+                    }
+                }
             }
         }
     }
@@ -87,14 +177,73 @@
         }
     }
 
-    // create backdrop component?
-
     &-MobileMenuWrapper {
         position: fixed;
+        z-index: 1000;
         inset: 0;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
-        background-color: rgba(0, 0, 0, 0.25);
+        background-color: rgba(0, 0, 0, 0.50);
+
+        nav {
+            position: absolute;
+            inset-block: 0;
+            inset-inline-start: 0;
+            border-inline-end: 1px solid rgba(128, 128, 128, 0.75);
+            height: 100%;
+            width: 75%;
+            padding: var(--content-padding);
+            background-color: var(--color-primary-background);
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(24px);
+        }
+    }
+
+    &-MobileHeader {
+        position: relative;
+        margin: 0;
+        padding-block-end: 8px;
+        margin-block-end: 16px;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 1px;
+            width: 90%;
+            background-color: var(--color-secondary-background);
+            inset-block-end: 0;
+            inset-inline-end: 0;
+        }
+    }
+}
+
+@keyframes DeselectActiveMobile {
+    0% {
+        background-position: bottom left;
+        background-size: 40% 3px;
+    }
+
+    25% {
+        background-size: 60% 3px;
+    }
+
+    50% {
+        background-position: bottom right;
+    }
+
+    100% {
+        background-position: bottom right;
+        background-size: 0 3px;
     }
 }
 

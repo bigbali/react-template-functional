@@ -2,10 +2,13 @@
 import { forwardRef, useEffect, useRef } from 'react';
 import { useLocation, useResolvedPath } from 'react-router';
 import { Link, NavLinkProps } from 'react-router-dom';
+import { useDevice } from 'Util';
 
 type NavigationProps = {
-    onActive?: (currentlyActive: string) => void
-    onInactive?: () => void
+    onActive?: (currentlyActive: string) => void,
+    onInactive?: () => void,
+    onActiveReselected?: (id: string, isMobile: boolean) => void,
+    name?: string
 };
 
 /**
@@ -19,13 +22,16 @@ export const NavigationLink = forwardRef<HTMLAnchorElement, NavLinkProps & Navig
     style: styleProp,
     to,
     children,
+    name,
     onActive,
     onInactive,
+    onActiveReselected,
     ...rest
 }, ref) {
     const location = useLocation();
     const path = useResolvedPath(to);
     const previouslyActive = useRef(false);
+    const { isMobile } = useDevice();
 
     const locationPathname = caseSensitive
         ? location.pathname
@@ -61,6 +67,10 @@ export const NavigationLink = forwardRef<HTMLAnchorElement, NavLinkProps & Navig
         onInactive();
     }
 
+    if (onActiveReselected && name && isActive && previouslyActive.current === true) {
+        onActiveReselected(name, isMobile);
+    }
+
     useEffect(() => {
         if (previouslyActive.current !== isActive) {
             previouslyActive.current = isActive;
@@ -71,10 +81,11 @@ export const NavigationLink = forwardRef<HTMLAnchorElement, NavLinkProps & Navig
         <Link
             {...rest}
             aria-current={ariaCurrent}
-            className={previouslyActive.current ? className?.concat('previouslyactive') : className}
+            className={previouslyActive.current ? className?.concat(' previouslyactive').trim() : className}
             ref={ref}
             style={style}
             to={to}
+            id={name}
         >
             {
                 typeof children === 'function'

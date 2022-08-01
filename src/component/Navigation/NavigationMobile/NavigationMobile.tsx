@@ -1,9 +1,10 @@
-import { HamburgerMenuIcon } from 'Component/Icon';
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useTimer } from 'Util';
 import { navigationMap } from '../Navigation';
-import '../Navigation.style';
+import { HamburgerMenuIcon } from 'Component/Icon';
 import NavigationItem from '../NavigationItem';
+import '../Navigation.style';
 
 const NavigationMobile = () => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -11,25 +12,38 @@ const NavigationMobile = () => {
     const [createTimer, clearTimer] = useTimer();
 
     useEffect(() => {
-        createTimer(() => setkeepRendered(isExpanded), 100);
+        if (isExpanded) {
+            document.querySelector('body')!.classList.add('disable-scrolling');
+        } else {
+            document.querySelector('body')!.classList.remove('disable-scrolling');
+        }
 
+        createTimer(() => setkeepRendered(isExpanded), 100);
         return () => { clearTimer(); };
     }, [isExpanded]);
+
+    const Menu = isExpanded && keepRendered ? (
+        <div block="Navigation" elem="MobileMenuWrapper">
+            <nav>
+                <h1 elem="MobileHeader">
+                    Menu
+                </h1>
+                <ul elem="List">
+                    {navigationMap.map(NavigationItem)}
+                </ul>
+            </nav>
+        </div>
+    ) : null;
+
+
+    const MenuPortal = createPortal(Menu, document.querySelector('#root')!);
 
     return (
         <>
             <div block="Navigation" elem="HamburgerIconWrapper" onClick={() => { setIsExpanded(true); }}>
                 <HamburgerMenuIcon isExpanded={isExpanded} />
             </div>
-            {(isExpanded && keepRendered) && (
-                <div block="Navigation" elem="MobileMenuWrapper">
-                    <nav>
-                        <ul elem="List">
-                            {navigationMap.map(NavigationItem)}
-                        </ul>
-                    </nav>
-                </div>
-            )}
+            {MenuPortal}
         </>
     );
 };

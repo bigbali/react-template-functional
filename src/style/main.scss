@@ -9,6 +9,7 @@
     --color-primary-background: var(--color-white);
     --color-secondary-background: rgb(215, 226, 240);
     --color-theme: rgb(204, 18, 18);
+    --color-primary-background-transparent: rgba(255, 255, 255, 0.75);
 
     --color-neutral-background: rgb(27, 152, 168);
     --color-neutral-foreground: var(--color-white);
@@ -36,6 +37,12 @@ body,
     background-color: var(--color-primary-background);
     font-family: $raleway;
     min-height: 100vh;
+}
+
+body {
+    &.disable-scrolling {
+        overflow: hidden;
+    }
 }
 
 main {
