@@ -1,62 +1,72 @@
-import { hideNotification } from 'Store/Notification/Notification.action';
-import { useDispatch, useSelector } from 'Util/Store';
-import { useEffect, useState } from 'react';
+// import { hideNotification } from 'Store/Notification/Notification.action';
+import { useDevice, useDispatch, useSelector } from 'Util';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './Notification.style.scss';
+import useNotification from 'Util/hook/useNotification';
+import { batch } from 'react-redux';
+// import { useTimer } from 'Util/hook/useTimer';
+import { useInterval } from 'Util/hook/useInterval';
+import { useTimer } from 'Util/hook/useTimer';
+import { NotificationStatus } from 'Store/notification';
+import { CloseIcon } from 'Component/Icon';
 
-export const Notification: FC = () => {
+export const Notification = () => {
+    const [keepRendered, setkeepRendered] = useState(false);
+    const [createTimer, clearTimer] = useTimer();
+    const ths = useRef<HTMLDivElement | null>(null);
     const {
-        timeout = 5000,
-        message,
-        status,
-        isVisible
-    } = useSelector(state => state.notification);
-
-    const dispatch = useDispatch();
-
-    const [isExpanded, setIsExpanded] = useState(false);
-
-    const closeNotification = () => {
-        setIsExpanded(false);
-
-        setTimeout(() => {
-            dispatch(hideNotification());
-        }, 200);
-    };
+        notification: {
+            message,
+            status,
+            visible
+        },
+        hide
+    } = useNotification();
 
     useEffect(() => {
-        if (message && isVisible) {
-            setIsExpanded(true);
+        createTimer(() => setkeepRendered(visible), 250);
 
-            if (timeout) {
-                const notificationLifetime = setTimeout(() => {
-                    dispatch(hideNotification());
-                }, timeout);
+        return () => { clearTimer(); };
+    }, [visible]);
 
-                return () => clearTimeout(notificationLifetime);
+    useEffect(() => {
+        const element = ths.current;
+
+        if (element) {
+            if (visible && keepRendered) {
+                element.className = `${element.className} visible`;
+            }
+            if (!visible && keepRendered) {
+                element.className = `${element.className} fading`;
             }
         }
-    }, [timeout, message, isVisible]);
+    }, [visible, keepRendered, ths.current]);
 
-    const getClass = () => {
-        const className = 'Notification';
-
-        if (!status) {
-            return className;
-        }
-
-        const mods = className + `_${status.toLowerCase()} ${isExpanded ? className + '_isExpanded' : ''}`;
-
-        return className + ' ' + mods;
-    };
+    if (!visible && !keepRendered) {
+        return null;
+    }
 
     return (
-        <div className={getClass()}>
-            <p>
+        <div
+            ref={ths}
+            block="Notification"
+            mods={{
+                INFO: status === NotificationStatus.INFO,
+                SUCCESS: status === NotificationStatus.SUCCESS,
+                WARNING: status === NotificationStatus.WARNING,
+                ERROR: status === NotificationStatus.ERROR
+            }}
+        >
+            <p elem="Message">
                 {message}
-                <span onClick={closeNotification}>
-                    &nbsp;&nbsp;&nbsp;X
-                </span>
             </p>
+            <button
+                elem="CloseButton"
+                onClick={() => {
+                    hide();
+                }}>
+                <CloseIcon />
+            </button>
         </div>
     );
 };
